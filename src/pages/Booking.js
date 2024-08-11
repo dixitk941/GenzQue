@@ -1,4 +1,3 @@
-// src/pages/Booking.js
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
@@ -28,61 +27,60 @@ const Booking = () => {
       setAppointmentType('');
       setAppointmentTime('');
     } catch (error) {
-      console.error('Error booking appointment:', error);
-      alert('Failed to book appointment. Please try again.');
+      console.error('Error booking appointment: ', error);
     }
   };
 
   return (
     <Layout>
-      <div className="max-w-md mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-6">Book an Appointment</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Phone</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Appointment Type</label>
-            <input
-              type="text"
-              value={appointmentType}
-              onChange={(e) => setAppointmentType(e.target.value)}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Preferred Time</label>
-            <input
-              type="datetime-local"
-              value={appointmentTime}
-              onChange={(e) => setAppointmentTime(e.target.value)}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded"
-              required
-            />
-          </div>
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-            Book Appointment
-          </button>
-        </form>
-      </div>
+      <section className="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-20 px-8 mt-16 rounded-lg shadow-lg">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-6">Book an Appointment</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-4 border border-gray-300 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full p-4 border border-gray-300 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Appointment Type"
+                value={appointmentType}
+                onChange={(e) => setAppointmentType(e.target.value)}
+                className="w-full p-4 border border-gray-300 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <input
+                type="datetime-local"
+                value={appointmentTime}
+                onChange={(e) => setAppointmentTime(e.target.value)}
+                className="w-full p-4 border border-gray-300 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-4 bg-purple-600 text-white font-bold rounded hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              Book Appointment
+            </button>
+          </form>
+        </div>
+      </section>
     </Layout>
   );
 };
