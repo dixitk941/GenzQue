@@ -1,37 +1,95 @@
-// src/components/Header.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isTop, setIsTop] = useState(true);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
+  const handleScroll = () => {
+    if (window.scrollY === 0) {
+      setIsTop(true);
+    } else {
+      setIsTop(false);
+    }
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="bg-gradient-to-r from-purple-500 to-pink-500 p-4 sm:p-6 md:p-8 text-white flex flex-col sm:flex-row justify-between items-center shadow-xl fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-screen-xl rounded-lg">
-      <div className="flex justify-between items-center w-full sm:w-auto">
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-          <Link to="/" className="hover:underline">GenZQue</Link>
-        </h1>
-        <div className="sm:hidden ml-auto">
-          <button onClick={toggleMenu} className="text-white focus:outline-none">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-            </svg>
-          </button>
-        </div>
+    <header
+      className={`fixed w-full z-50 transition duration-300 transform ${
+        isTop ? 'bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg' : 
+        'bg-gradient-to-r from-purple-500 to-pink-500 shadow-2xl rounded-lg mx-auto my-2 w-11/12'
+      }`}
+      style={{
+        boxShadow: isTop 
+          ? '0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1)' 
+          : '0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 30px rgba(0, 0, 0, 0.3)',
+      }}
+    >
+      <div className="container mx-auto flex justify-between items-center py-4 px-8 rounded-full">
+        <Link 
+          to="/" 
+          className="text-3xl font-extrabold text-white transform transition-transform duration-300 hover:scale-110"
+          style={{
+            textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          GenZQue
+        </Link>
+        <nav className="hidden md:flex space-x-8">
+          <Link 
+            to="/" 
+            className="text-lg font-medium text-white hover:text-gray-300 transform transition-transform duration-300 hover:scale-110"
+          >
+            Home
+          </Link>
+          <Link 
+            to="/join" 
+            className="text-lg font-medium text-white hover:text-gray-300 transform transition-transform duration-300 hover:scale-110"
+          >
+            Join Queue
+          </Link>
+          <Link 
+            to="/booking" 
+            className="text-lg font-medium text-white hover:text-gray-300 transform transition-transform duration-300 hover:scale-110"
+          >
+            Book Appointment
+          </Link>
+          <Link 
+            to="/appointments" 
+            className="text-lg font-medium text-white hover:text-gray-300 transform transition-transform duration-300 hover:scale-110"
+          >
+            View Appointments
+          </Link>
+          <Link 
+            to="/about" 
+            className="text-lg font-medium text-white hover:text-gray-300 transform transition-transform duration-300 hover:scale-110"
+          >
+            About
+          </Link>
+        </nav>
+        <button className="md:hidden text-white" onClick={() => {}}>
+          <svg 
+            className="w-8 h-8 transform transition-transform duration-300 hover:scale-110" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth="2" 
+              d="M4 6h16M4 12h16M4 18h16" 
+            ></path>
+          </svg>
+        </button>
       </div>
-      <nav className={`flex-col sm:flex-row ${isOpen ? 'flex' : 'hidden'} sm:flex space-y-2 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0`}>
-        <ul className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
-          <li><Link to="/" className="hover:underline">Home</Link></li>
-          <li><Link to="/join" className="hover:underline">Join Queue</Link></li>
-          <li><Link to="/booking" className="hover:underline">Book Appointment</Link></li>
-          <li><Link to="/appointments" className="hover:underline">View Appointments</Link></li>
-          <li><Link to="/about" className="hover:underline">About</Link></li>
-        </ul>
-      </nav>
     </header>
   );
 };

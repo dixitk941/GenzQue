@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import JoinQueue from './pages/JoinQueue';
 import Booking from './pages/Booking';
+import About from './pages/About';
 import Appointments from './pages/Appointments';
 import Header from './components/Header';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/join" element={<JoinQueue />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/appointments" element={<Appointments />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
     </Router>
